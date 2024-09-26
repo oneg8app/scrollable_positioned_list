@@ -295,6 +295,8 @@ class ScrollOffsetController {
 
   _ScrollablePositionedListState? _scrollableListState;
 
+  bool isIndirectScroll = false;
+
   // double currentPosition = _scrollableListState!.primary.scrollController.offset;
   ScrollController get primaryScrollController {
     return  _scrollableListState!.primary.scrollController;
@@ -560,6 +562,7 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
           duration: duration,
           curve: curve);
     } else {
+      widget.scrollOffsetController?.isIndirectScroll = true;
       final scrollAmount = _screenScrollCount *
           primary.scrollController.position.viewportDimension;
       final startCompleter = Completer<void>();
